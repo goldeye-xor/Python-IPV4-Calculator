@@ -138,11 +138,14 @@ def ip_priv(ip_bin):
 
 ip_priv = ip_priv(ip_bin)
 
+mask = bin_to_ip(cidr_bin)
+
 
 print("----------------------------------------------------")
 print("IP :", ip)
 print("Classe de l'ip :", ip_class)
 print("CIDR :", cidr)
+print("Masque :", mask)
 print("Privé :", ip_priv)
 print("----------------------------------------------------")
 print("@ du réseau :", ip_net)
