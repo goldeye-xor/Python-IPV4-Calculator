@@ -5,10 +5,10 @@ cidr = ip.split("/")[1]
 ip = ip.split("/")[0]
 
 def ip_to_bin(ip):
-    # Cette fonction convertit une ip en binaire et la retourne en string
+    # Cette fonction convertit une ip en binaire
     ip_bin = ""
     for i in ip.split("."):
-        ip_bin += bin(int(i))[2:].zfill(8)
+        ip_bin += "{0:08b}".format(int(i))
     return ip_bin
 
 ip_bin = ip_to_bin(ip)
@@ -128,11 +128,11 @@ def ip_priv(ip_bin):
         return "Loopback"
     # si les 8 premiers bits forme 10
     elif ip_bin[0:8] == "00001010":
-        return "Privé"
+        return "Prive"
     elif ip_bin[0:12] == "101011000001":
-        return "Privé"
+        return "Prive"
     elif ip_bin[0:16] == "1100000010101000":
-        return "Privé"
+        return "Prive"
     else :
         return "Public"
 
@@ -140,26 +140,39 @@ ip_priv = ip_priv(ip_bin)
 
 mask = bin_to_ip(cidr_bin)
 
+def reform_bin(bin):
+    # cette fonction met un espace entre chaque octet
+    bin_str = ""
+    for i in range(0, 32, 8):
+        bin_str += bin[i:i+8] + " "
+    return bin_str[:-1]
 
-print("----------------------------------------------------")
-print("IP :", ip)
-print("Classe de l'ip :", ip_class)
-print("CIDR :", cidr)
-print("Masque :", mask)
-print("Privé :", ip_priv)
-print("----------------------------------------------------")
-print("@ du réseau :", ip_net)
-print("@ du broadcast :", ip_brc)
-print("Première @ de la plage d'@ :", ip_range_s)
-print("Dernière @ de la plage d'@ :", ip_range_e)
-print("----------------------------------------------------")
-print("IP en BIN :", ip_bin)
-print("CIDR en BIN :", cidr_bin)
-print("@ du réseau en BIN :", ip_net_bin)
-print("@ du broadcast en BIN :", ip_brc_bin)
-print("Première @ de la plage d'@ en BIN :", ip_range_s_bin)
-print("Dernière @ de la plage d'@ en BIN :", ip_range_e_bin)
-print("----------------------------------------------------")
+ip_bin = reform_bin(ip_bin)
+cidr_bin = reform_bin(cidr_bin)
+ip_net_bin = reform_bin(ip_net_bin)
+ip_brc_bin = reform_bin(ip_brc_bin)
+ip_range_s_bin = reform_bin(ip_range_s_bin)
+ip_range_e_bin = reform_bin(ip_range_e_bin)
+
+print("------- Bin ---------------------------------------------")
+print("@           :", ip_bin)
+print("Mask        :", cidr_bin)
+print("@ net       :", ip_net_bin)
+print("@ broadcast :", ip_brc_bin)
+print("First @     :", ip_range_s_bin)
+print("Last @      :", ip_range_e_bin)
+print("------- Address ---------------------------------------------")
+print("@           :", ip)
+print("Classe      :", ip_class)
+print("CIDR        :", cidr)
+print("Mask        :", mask)
+print("Type        :", ip_priv)
+print("------- Network ---------------------------------------------")
+print("@ net       :", ip_net)
+print("@ broadcast :", ip_brc)
+print("First @     :", ip_range_s)
+print("Last @      :", ip_range_e)
+
 
 
 
