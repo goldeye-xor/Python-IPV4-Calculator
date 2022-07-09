@@ -3,6 +3,6 @@ Script en Python qui permet de calculer les information d'une ip
 
 ![Exemple](ipv4.gif)
 
-## Support Numworks [Calculator](https://www.numworks.com/fr/)
+## Support [Numworks](https://www.numworks.com/fr/) Calculator
 
-![Exemple](numworks.gif)
+![NumWorks](numworks.gif)
